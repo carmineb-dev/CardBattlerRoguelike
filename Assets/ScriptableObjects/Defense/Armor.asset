@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100c6d9b8646c634988ece0fca0dc84c, type: 3}
-  m_Name: Strike
+  m_Name: Armor
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Strike
-  cardDescription: Deal 5 damage
+  cardName: Armor
+  cardDescription: Gain 6 Block
   cardCost: 1
   cardPriority: 2
-  cardCategory: 0
+  cardCategory: 1

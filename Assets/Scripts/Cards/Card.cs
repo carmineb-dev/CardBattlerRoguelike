@@ -18,14 +18,6 @@ public class Card : MonoBehaviour
 
     private CardData data;
 
-    /*
-    private void Start()
-    {
-        Initialize(cardData);
-        UpdateVisual();
-    }
-    */
-
     public void Initialize(CardData cardData)
     {
         data = cardData;
