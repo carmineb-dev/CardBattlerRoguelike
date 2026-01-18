@@ -1,39 +1,35 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    // === STATS ===
-    [SerializeField] private int maxHp = 30;
-
-    [SerializeField] private int currentHp;
-
     // === UI ===
     [SerializeField] private EnemyHealthUI healthUI;
 
-    public void TakeDamage(int damage)
+    private void Awake()
     {
-        currentHp = Mathf.Clamp(currentHp - damage, 0, maxHp);
-        healthUI.UpdateUI(currentHp, maxHp);
-
-        Debug.Log($"Enemy HP: {currentHp}");
-
-        if (currentHp <= 0)
-        {
-            Die();
-        }
+        characterName = "Enemy";
     }
 
-    private void Die()
-    {
-        Debug.Log("Enemy defeated!");
-    }
-
-    public void Initialize()
+    public override void Initialize()
     {
         // Stats
         currentHp = maxHp;
+        currentMana = maxMana;
+        currentBlock = 0;
 
         // UI
         healthUI.InitializeUI(maxHp);
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        healthUI.UpdateUI(currentHp, maxHp);
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        Debug.Log("Enemy defeated!");
     }
 }

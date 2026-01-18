@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4efdd537272e364987e816a22bf2b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
-  cardData: {fileID: 0}
+  cardData: {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   nameText: {fileID: 1572170821930632823}
   descriptionText: {fileID: 2970215496421288019}
   costText: {fileID: 371305506998454720}

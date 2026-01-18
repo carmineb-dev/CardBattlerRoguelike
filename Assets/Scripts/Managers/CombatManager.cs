@@ -7,7 +7,10 @@ public class CombatManager : MonoBehaviour
     // === References ===
     [SerializeField] private Player player;
 
+    public Player Player => player;
+
     [SerializeField] private Enemy enemy;
+    public Enemy Enemy => enemy;
 
     private void Awake()
     {

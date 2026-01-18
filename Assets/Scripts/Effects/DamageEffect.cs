@@ -1,0 +1,10 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "DamageEffect", menuName = "Card Effects/Damage")]
+public class DamageEffect : CardEffect
+{
+    public override void Execute(Character caster, Character target, int value)
+    {
+        target.TakeDamage(value);
+    }
+}

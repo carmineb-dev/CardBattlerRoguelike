@@ -1,77 +1,80 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    // === STATS ===
-    [SerializeField] private int maxHp = 50;
-
-    [SerializeField] private int maxMana = 5;
-    [SerializeField] private int currentHp;
-    [SerializeField] private int currentMana;
-    [SerializeField] private int block;
-
     // === UI ===
     [SerializeField] private PlayerHealthUI healthUI;
 
     [SerializeField] private PlayerManaUI manaUI;
     [SerializeField] private PlayerBlockUI blockUI;
 
-    public void TakeDamage(int damage)
+    [SerializeField] private Hand hand;
+    public Hand Hand => hand;
+
+    private void Awake()
     {
-        int remainingDamage = damage;
-
-        if (block > 0)
-        {
-            int absorbedDamage = Mathf.Min(block, remainingDamage);
-            block -= absorbedDamage;
-            remainingDamage -= absorbedDamage;
-
-            blockUI.UpdateUI(block);
-        }
-
-        if (remainingDamage > 0)
-        {
-            currentHp = Mathf.Clamp(currentHp - remainingDamage, 0, maxHp);
-            healthUI.UpdateUI(currentHp);
-        }
-
-        Debug.Log($"Player HP: {currentHp}");
+        characterName = "Player";
     }
 
-    public void GainBlock(int amount)
+    // === INITIALIZE ===
+    public override void Initialize()
     {
-        block += amount;
-        blockUI.UpdateUI(block);
-        Debug.Log($"Player Block: {block}");
+        // Stats
+        currentHp = maxHp;
+        currentMana = maxMana;
+        currentBlock = 0;
+
+        // UI
+        UpdateAllUI();
     }
 
-    public bool canSpendMana(int amount)
+    // === DAMAGE ===
+    public override void TakeDamage(int damage)
     {
-        return currentMana >= amount;
+        base.TakeDamage(damage);
+
+        healthUI.UpdateUI(currentHp);
     }
 
-    public void SpendMana(int amount)
+    protected override void Die()
     {
-        currentMana = Mathf.Clamp(currentMana - amount, 0, maxMana);
+        base.Die();
+        Debug.Log("Game Over");
+    }
+
+    // === BLOCK ===
+    public override void GainBlock(int amount)
+    {
+        base.GainBlock(amount);
+        blockUI.UpdateUI(currentBlock);
+    }
+
+    public override void ResetBlock()
+    {
+        base.ResetBlock();
+        blockUI.UpdateUI(currentBlock);
+    }
+
+    // === MANA ===
+
+    public override void SpendMana(int amount)
+    {
+        base.SpendMana(amount);
         manaUI.UpdateUI(currentMana, maxMana);
     }
 
     public void RefillMana()
     {
-        currentMana = maxMana;
+        base.RefillMana();
         manaUI.UpdateUI(currentMana, maxMana);
     }
 
-    public void Initialize()
+    private void UpdateAllUI()
     {
-        // Stats
-        currentHp = maxHp;
-        currentMana = maxMana;
-        block = 0;
-
-        // UI
         healthUI.UpdateUI(currentHp);
         manaUI.UpdateUI(currentMana, maxMana);
+        blockUI.UpdateUI(currentBlock);
     }
 }

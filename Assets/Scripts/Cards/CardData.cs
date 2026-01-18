@@ -12,7 +12,8 @@ public class CardData : ScriptableObject
     [SerializeField] private int cardCost;
     [SerializeField] private int cardPriority;
     [SerializeField] private CardCategory cardCategory;
-
+    [SerializeField] private CardEffect effect;
+    [SerializeField] private int value; // value of the effect
     public string Name => cardName;
 
     public string Description => cardDescription;
@@ -22,4 +23,8 @@ public class CardData : ScriptableObject
     public int Priority => cardPriority;
 
     public CardCategory Category => cardCategory;
+
+    public CardEffect Effect => effect;
+
+    public int Value => value;
 }
