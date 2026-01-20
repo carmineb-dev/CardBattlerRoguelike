@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100c6d9b8646c634988ece0fca0dc84c, type: 3}
-  m_Name: HeavyArmor
+  m_Name: Draw
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Heavy Armor
-  cardDescription: Gain 12 block
-  cardCost: 2
-  cardPriority: 3
-  cardCategory: 1
-  effect: {fileID: 11400000, guid: fdf75c9766d29994696b62bd46579c0c, type: 2}
-  value: 12
+  cardName: Draw
+  cardDescription: Draw 2 cards
+  cardCost: 0
+  cardPriority: 2
+  cardCategory: 2
+  effect: {fileID: 11400000, guid: 9625084639766784daf5534b3bf46c75, type: 2}
+  value: 2

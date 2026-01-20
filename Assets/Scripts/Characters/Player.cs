@@ -35,6 +35,7 @@ public class Player : Character
     {
         base.TakeDamage(damage);
 
+        blockUI.UpdateUI(currentBlock);
         healthUI.UpdateUI(currentHp);
     }
 

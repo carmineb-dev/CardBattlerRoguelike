@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Hand : MonoBehaviour
 {
-    public static Hand instance;
+    public static Hand Instance;
 
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Transform handTransform;
@@ -12,9 +12,9 @@ public class Hand : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -37,16 +37,18 @@ public class Hand : MonoBehaviour
     public void RemoveCard(Card card)
     {
         cardsInHand.Remove(card);
+
+        Destroy(card.gameObject);
     }
 
     public void ClearHand()
     {
-        foreach (Card card in cardsInHand)
-        {
-            Destroy(card.gameObject);
-        }
+        var copy = new List<Card>(cardsInHand);
 
-        cardsInHand.Clear();
+        foreach (Card card in copy)
+        {
+            RemoveCard(card);
+        }
     }
 
     public int CardCount => cardsInHand.Count;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Deck : MonoBehaviour
 {
+    public static Deck Instance;
+
     [SerializeField] private List<CardData> startingDeck;
 
     [SerializeField] private List<CardData> drawPile = new List<CardData>();
@@ -10,9 +12,34 @@ public class Deck : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton setup
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         // Set drawpile
         drawPile.AddRange(startingDeck);
         Shuffle();
+    }
+
+    // DrawEffect method
+    public void DrawCard()
+    {
+        CardData drawnCard = Draw();
+
+        if (drawnCard != null)
+        {
+            Hand.Instance.AddCard(drawnCard);
+        }
+        else
+        {
+            Debug.Log("No cards left to draw!");
+        }
     }
 
     public CardData Draw()

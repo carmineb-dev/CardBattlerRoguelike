@@ -74,7 +74,7 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.localScale = originalScale * 1.1f; // Zoom on hover
+        transform.localScale = originalScale * 1.2f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -102,7 +102,7 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
             // Remove from hand if player
             if (owner == CombatManager.Instance.Player)
             {
-                Hand.instance.RemoveCard(this);
+                Hand.Instance.RemoveCard(this);
             }
 
             Destroy(gameObject);

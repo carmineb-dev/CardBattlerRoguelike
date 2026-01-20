@@ -29,4 +29,14 @@ public class TestAttack : MonoBehaviour
     {
         enemy.TakeDamage(12);
     }
+
+    public void resetBlock()
+    {
+        player.ResetBlock();
+    }
+
+    public void drawCard()
+    {
+        Deck.Instance.DrawCard();
+    }
 }

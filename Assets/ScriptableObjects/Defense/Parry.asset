@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100c6d9b8646c634988ece0fca0dc84c, type: 3}
-  m_Name: QuickAttack
+  m_Name: Parry
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Quick Attack
-  cardDescription: Deals 4 Damage, attack first
-  cardCost: 1
-  cardPriority: 0
-  cardCategory: 3
+  cardName: Parry
+  cardDescription: Gain 3 block, +1 priority this turn
+  cardCost: 0
+  cardPriority: 1
+  cardCategory: 1
+  effect: {fileID: 11400000, guid: fdf75c9766d29994696b62bd46579c0c, type: 2}
+  value: 3
