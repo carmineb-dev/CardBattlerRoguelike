@@ -39,4 +39,9 @@ public class TestAttack : MonoBehaviour
     {
         Deck.Instance.DrawCard();
     }
+
+    public void endTurn()
+    {
+        CombatManager.Instance.EndTurn();
+    }
 }

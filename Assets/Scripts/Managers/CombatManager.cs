@@ -28,4 +28,21 @@ public class CombatManager : MonoBehaviour
         player.Initialize();
         enemy.Initialize();
     }
+
+    public void EndTurn()
+    {
+        Debug.Log("End turn");
+
+        player.TakeDamage(5);
+
+        player.ResetBlock();
+        Debug.Log("block reset");
+
+        player.RefillMana();
+
+        while (Hand.Instance.CardCount < 5)
+        {
+            Deck.Instance.DrawCard();
+        }
+    }
 }

@@ -66,7 +66,7 @@ public class Player : Character
         manaUI.UpdateUI(currentMana, maxMana);
     }
 
-    public void RefillMana()
+    public override void RefillMana()
     {
         base.RefillMana();
         manaUI.UpdateUI(currentMana, maxMana);
