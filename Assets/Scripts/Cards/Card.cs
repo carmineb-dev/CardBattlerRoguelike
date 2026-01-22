@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private CardData cardData;
+    public CardData cardData { get; private set; }
 
     private Character owner; // Who owns this card
 
@@ -19,7 +19,6 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
     [SerializeField] private Image background;
 
     private Vector3 originalScale;
-    private CardData data;
 
     private void Start()
     {
@@ -96,16 +95,14 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
             // Spend mana
             caster.SpendMana(cardData.Cost);
 
-            // Execute card effect
-            cardData.Effect.Execute(caster, target, cardData.Value);
+            // Queue card effect
+            CombatManager.Instance.QueueCard(this, caster, target);
 
-            // Remove from hand if player
-            if (owner == CombatManager.Instance.Player)
-            {
-                Hand.Instance.RemoveCard(this);
-            }
-
-            Destroy(gameObject);
+            // Visual feedback of the played card
+            CanvasGroup cg = GetComponent<CanvasGroup>();
+            cg.alpha = 0.5f; // Gray out
+            cg.interactable = false; // Not clickable anymore
+            cg.blocksRaycasts = false;
         }
         else
         {

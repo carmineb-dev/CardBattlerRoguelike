@@ -8,7 +8,10 @@ public class Deck : MonoBehaviour
     [SerializeField] private List<CardData> startingDeck;
 
     [SerializeField] private List<CardData> drawPile = new List<CardData>();
+    public int DrawPileCount => drawPile.Count;
+
     [SerializeField] private List<CardData> discardPile = new List<CardData>();
+    public int DiscardPileCount => discardPile.Count;
 
     private void Awake()
     {

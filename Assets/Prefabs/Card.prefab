@@ -939,6 +939,7 @@ GameObject:
   - component: {fileID: 4409839190113050542}
   - component: {fileID: 4251479141877057947}
   - component: {fileID: -1489793041657896261}
+  - component: {fileID: -6817825313337961518}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -1025,3 +1026,15 @@ MonoBehaviour:
   costText: {fileID: 371305506998454720}
   priorityText: {fileID: 6511907162131723282}
   background: {fileID: 4251479141877057947}
+--- !u!225 &-6817825313337961518
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336007034543841672}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
