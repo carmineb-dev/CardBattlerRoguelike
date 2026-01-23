@@ -4,6 +4,8 @@ public abstract class Character : MonoBehaviour
 {
     public string characterName;
 
+    [SerializeField] private HealPopup healPopup;
+
     [Header("Stats")]
     [SerializeField] protected int maxHp;
 
@@ -55,5 +57,20 @@ public abstract class Character : MonoBehaviour
     public virtual void ResetBlock()
     {
         currentBlock = 0;
+    }
+
+    // === HEAL ===
+    public virtual void Heal(int amount)
+    {
+        int hpBefore = currentHp;
+        currentHp = Mathf.Clamp(currentHp + amount, 0, maxHp);
+        int healedHp = currentHp - hpBefore;
+
+        if (healedHp > 0)
+        {
+            healPopup.ShowHeal(healedHp);
+        }
+
+        Debug.Log($"{characterName} healed {amount} HP. Current {currentHp}/{maxHp}");
     }
 }
