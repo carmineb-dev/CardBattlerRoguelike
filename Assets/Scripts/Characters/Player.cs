@@ -72,6 +72,12 @@ public class Player : Character
         manaUI.UpdateUI(currentMana, maxMana);
     }
 
+    public override void IncreaseMaxMana(int amount)
+    {
+        base.IncreaseMaxMana(amount);
+        manaUI.UpdateUI(currentMana, maxMana);
+    }
+
     // === HEAL ===
     public override void Heal(int amount)
     {

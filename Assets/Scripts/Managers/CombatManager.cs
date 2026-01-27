@@ -7,7 +7,7 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance;
 
-    // === References ===
+    // === REFERENCES ===
     [SerializeField] private Player player;
 
     public Player Player => player;

@@ -4,10 +4,11 @@ public abstract class Character : MonoBehaviour
 {
     public string characterName;
 
-    [SerializeField] private HealPopup healPopup;
-
+    // === STATS ===
     [Header("Stats")]
     [SerializeField] protected int maxHp;
+
+    public int MaxHp => maxHp;
 
     [SerializeField] protected int maxMana;
     public int currentHp { get; protected set; }
@@ -16,13 +17,27 @@ public abstract class Character : MonoBehaviour
 
     public int currentBlock { get; protected set; }
 
+    // === BUFFS ===
+
+    public bool negateNextAttck = false;
+    public bool nextCardFree = false;
+    [SerializeField] private HealPopup healPopup;
+
     public abstract void Initialize();
 
+    // === DAMAGE ===
     public virtual void TakeDamage(int damage)
     {
+        if (negateNextAttck)
+        {
+            Debug.Log($"{characterName} negated attack!");
+            negateNextAttck = false;
+            return;
+        }
+
         int damageAfterBlock = Mathf.Max(0, damage - currentBlock);
         currentBlock = Mathf.Max(0, currentBlock - damage);
-        currentHp -= damageAfterBlock;
+        currentHp = Mathf.Clamp(currentHp - damageAfterBlock, 0, maxHp);
 
         Debug.Log($"{characterName} HP: {currentHp}");
 
@@ -46,6 +61,11 @@ public abstract class Character : MonoBehaviour
     public virtual void RefillMana()
     {
         currentMana = maxMana;
+    }
+
+    public virtual void IncreaseMaxMana(int amount)
+    {
+        maxMana += amount;
     }
 
     // === BLOCK ===

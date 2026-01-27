@@ -92,8 +92,16 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
         // Check mana cost
         if (caster.currentMana >= cardData.Cost)
         {
-            // Spend mana
-            caster.SpendMana(cardData.Cost);
+            if (caster.nextCardFree)
+            {
+                // Don't spend mana
+                caster.nextCardFree = false;
+                Debug.Log("Card played for free!");
+            }
+            else
+            {   // Spend mana
+                caster.SpendMana(cardData.Cost);
+            }
 
             // Queue card effect
             CombatManager.Instance.QueueCard(this, caster, target);

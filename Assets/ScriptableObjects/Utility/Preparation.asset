@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100c6d9b8646c634988ece0fca0dc84c, type: 3}
+  m_Name: Preparation
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Preparation
+  cardDescription: The first card played in the next turn will cost 0 mana
+  cardCost: 0
+  cardPriority: 1
+  cardCategory: 2
+  effect: {fileID: 11400000, guid: 127f565bf21989b49bfa1ae4a7e91fdf, type: 2}
+  value: 0
