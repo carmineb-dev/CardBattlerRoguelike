@@ -6,7 +6,7 @@ public class NegateEffect : CardEffect
 {
     public override void Execute(Character caster, Character target, int value)
     {
-        caster.negateNextAttck = true;
+        caster.negateNextAttack = true;
         Debug.Log($"{caster.characterName} will negate next attack");
     }
 }

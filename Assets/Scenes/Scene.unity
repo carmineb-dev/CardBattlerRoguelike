@@ -1974,8 +1974,11 @@ MonoBehaviour:
   characterName: 
   maxHp: 50
   maxMana: 0
+  baseMaxMana: 0
   negateNextAttck: 0
   nextCardFree: 0
+  isDamageMultiplierActive: 0
+  damageMultiplier: 1
   healPopup: {fileID: 0}
   healthUI: {fileID: 533079830}
 --- !u!224 &980263920
@@ -2109,16 +2112,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Deck
   startingDeck:
-  - {fileID: 11400000, guid: 5936e67a4a9dfe4449d4bc5f8e6a904b, type: 2}
-  - {fileID: 11400000, guid: 5936e67a4a9dfe4449d4bc5f8e6a904b, type: 2}
-  - {fileID: 11400000, guid: 5936e67a4a9dfe4449d4bc5f8e6a904b, type: 2}
-  - {fileID: 11400000, guid: 6675ccf4c1a1a8b4498b2ef30222f745, type: 2}
-  - {fileID: 11400000, guid: 6675ccf4c1a1a8b4498b2ef30222f745, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
+  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
+  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
+  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
+  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
+  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
+  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
   drawPile: []
   discardPile: []
 --- !u!1 &1043945454
@@ -2261,10 +2263,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 72
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -3221,8 +3223,11 @@ MonoBehaviour:
   characterName: 
   maxHp: 30
   maxMana: 3
+  baseMaxMana: 3
   negateNextAttck: 0
   nextCardFree: 0
+  isDamageMultiplierActive: 0
+  damageMultiplier: 1
   healPopup: {fileID: 1138188927}
   healthUI: {fileID: 763278245}
   manaUI: {fileID: 1751825933}
@@ -3645,10 +3650,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 72
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1

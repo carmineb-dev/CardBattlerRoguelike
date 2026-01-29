@@ -20,8 +20,12 @@ public class BuffEffect : CardEffect
         {
             case BuffType.MaxManaIncrease:
                 caster.IncreaseMaxMana(buffValue);
-                caster.RefillMana();
                 Debug.Log($"{caster.characterName} gained +{buffValue} max mana!");
+                break;
+
+            case BuffType.DamageMultiplier:
+                caster.isDamageMultiplierActive = true;
+                caster.damageMultiplier = buffValue;
                 break;
         }
     }

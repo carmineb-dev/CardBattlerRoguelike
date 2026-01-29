@@ -17,3 +17,5 @@ MonoBehaviour:
   cardCost: 1
   cardPriority: 2
   cardCategory: 2
+  effect: {fileID: 11400000, guid: 8567d9294e3a9eb48b17a343a6694b9b, type: 2}
+  value: 0

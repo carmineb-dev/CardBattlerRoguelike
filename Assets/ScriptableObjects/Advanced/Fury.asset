@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100c6d9b8646c634988ece0fca0dc84c, type: 3}
-  m_Name: Execute
+  m_Name: Fury
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Execute
-  cardDescription: Deal 10 damage if enemy HP < 50%, else 5 damage
-  cardCost: 1
-  cardPriority: 2
-  cardCategory: 0
-  effect: {fileID: 11400000, guid: 0c45c381b9179694da68000f336a95c0, type: 2}
-  value: 5
+  cardName: Fury
+  cardDescription: In the next turn, the first attack played deals double damage
+  cardCost: 3
+  cardPriority: 3
+  cardCategory: 3
+  effect: {fileID: 11400000, guid: 2d57708697999044f9625344fe2bfdbc, type: 2}
+  value: 0

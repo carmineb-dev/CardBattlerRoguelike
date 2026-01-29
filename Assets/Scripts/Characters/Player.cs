@@ -23,6 +23,7 @@ public class Player : Character
     {
         // Stats
         currentHp = maxHp;
+        maxMana = baseMaxMana;
         currentMana = maxMana;
         currentBlock = 0;
 

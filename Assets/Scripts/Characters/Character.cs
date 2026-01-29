@@ -10,7 +10,8 @@ public abstract class Character : MonoBehaviour
 
     public int MaxHp => maxHp;
 
-    [SerializeField] protected int maxMana;
+    [SerializeField] protected int maxMana; // max mana value in combat
+    [SerializeField] protected int baseMaxMana; // max mana value out of the combat
     public int currentHp { get; protected set; }
 
     public int currentMana { get; protected set; }
@@ -19,8 +20,10 @@ public abstract class Character : MonoBehaviour
 
     // === BUFFS ===
 
-    public bool negateNextAttck = false;
+    public bool negateNextAttack = false;
     public bool nextCardFree = false;
+    public bool isDamageMultiplierActive = false;
+    public int damageMultiplier = 1;
     [SerializeField] private HealPopup healPopup;
 
     public abstract void Initialize();
@@ -28,10 +31,10 @@ public abstract class Character : MonoBehaviour
     // === DAMAGE ===
     public virtual void TakeDamage(int damage)
     {
-        if (negateNextAttck)
+        if (negateNextAttack)
         {
             Debug.Log($"{characterName} negated attack!");
-            negateNextAttck = false;
+            negateNextAttack = false;
             return;
         }
 
