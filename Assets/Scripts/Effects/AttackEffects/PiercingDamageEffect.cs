@@ -6,6 +6,6 @@ public class PiercingDamage : CardEffect
 {
     public override void Execute(Character caster, Character target, int value)
     {
-        target.currentHp -= value;
+        target.TakePiercingDamage(value);
     }
 }

@@ -40,6 +40,12 @@ public class Player : Character
         healthUI.UpdateUI(currentHp);
     }
 
+    public override void TakePiercingDamage(int damage)
+    {
+        base.TakePiercingDamage(damage);
+        healthUI.UpdateUI(currentHp);
+    }
+
     protected override void Die()
     {
         base.Die();

@@ -103,7 +103,7 @@ public class CombatManager : MonoBehaviour
             cardData = cardInstance.cardData,
             cardInstance = cardInstance,
             caster = caster,
-            target = target
+            target = target,
         };
 
         cardsToResolve.Add(playData);

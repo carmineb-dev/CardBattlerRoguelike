@@ -1975,9 +1975,9 @@ MonoBehaviour:
   maxHp: 50
   maxMana: 0
   baseMaxMana: 0
-  negateNextAttck: 0
+  negateNextAttack: 0
   nextCardFree: 0
-  isDamageMultiplierActive: 0
+  hasFuryNextAttack: 0
   damageMultiplier: 1
   healPopup: {fileID: 0}
   healthUI: {fileID: 533079830}
@@ -2113,14 +2113,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Deck
   startingDeck:
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
+  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
+  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
-  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: e7f85589c8706d048836fc1d33ddc611, type: 2}
+  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
+  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
+  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
   drawPile: []
   discardPile: []
 --- !u!1 &1043945454
@@ -3224,9 +3224,9 @@ MonoBehaviour:
   maxHp: 30
   maxMana: 3
   baseMaxMana: 3
-  negateNextAttck: 0
+  negateNextAttack: 0
   nextCardFree: 0
-  isDamageMultiplierActive: 0
+  hasFuryNextAttack: 0
   damageMultiplier: 1
   healPopup: {fileID: 1138188927}
   healthUI: {fileID: 763278245}

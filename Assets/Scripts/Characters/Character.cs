@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -22,11 +25,14 @@ public abstract class Character : MonoBehaviour
 
     public bool negateNextAttack = false;
     public bool nextCardFree = false;
-    public bool isDamageMultiplierActive = false;
+    public bool hasFuryNextAttack = false;
     public int damageMultiplier = 1;
     [SerializeField] private HealPopup healPopup;
 
     public abstract void Initialize();
+
+    // === DAMAGE PIPELINE ===
+    private readonly List<IDamagePipelineStep> damagePipeline = new();
 
     // === DAMAGE ===
     public virtual void TakeDamage(int damage)
@@ -48,6 +54,11 @@ public abstract class Character : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public virtual void TakePiercingDamage(int damage)
+    {
+        currentHp = Mathf.Clamp(currentHp - damage, 0, maxHp);
     }
 
     protected virtual void Die()
@@ -95,5 +106,46 @@ public abstract class Character : MonoBehaviour
         }
 
         Debug.Log($"{characterName} healed {amount} HP. Current {currentHp}/{maxHp}");
+    }
+
+    // === PIPELINE METHODS ===
+
+    public void AddDamageStep(IDamagePipelineStep step)
+    {
+        damagePipeline.Add(step);
+    }
+
+    public void DealDamage(Character target, int baseDamage)
+    {
+        int damage = baseDamage;
+
+        if (hasFuryNextAttack)
+        {
+            damage *= 2;
+            ResetFury();
+        }
+
+        foreach (var step in damagePipeline)
+        {
+            damage = step.Process(damage, this, target);
+        }
+        target.TakeDamage(damage);
+        CleanupPipeline();
+    }
+
+    private void CleanupPipeline()
+    {
+        damagePipeline.RemoveAll(step => step.expired);
+    }
+
+    // === FURY METHODS ===
+    public void ActivateFuryNextAttack()
+    {
+        hasFuryNextAttack = true;
+    }
+
+    public void ResetFury()
+    {
+        hasFuryNextAttack = false;
     }
 }

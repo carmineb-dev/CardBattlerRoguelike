@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100c6d9b8646c634988ece0fca0dc84c, type: 3}
-  m_Name: Fury
+  m_Name: Piercing Shot
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Fury
-  cardDescription: In the next turn, the first attack played deals double damage
-  cardCost: 3
-  cardPriority: 3
-  cardCategory: 3
-  effect: {fileID: 11400000, guid: f9502e9871fcf7440b7bad805b2a9817, type: 2}
-  value: 0
+  cardName: Piercing Shot
+  cardDescription: Deal 8 damage, ignore block
+  cardCost: 2
+  cardPriority: 2
+  cardCategory: 0
+  effect: {fileID: 11400000, guid: 09b5b05547ac0ab4e8162e8c4db0be93, type: 2}
+  value: 8

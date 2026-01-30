@@ -27,6 +27,12 @@ public class Enemy : Character
         healthUI.UpdateUI(currentHp, maxHp);
     }
 
+    public override void TakePiercingDamage(int damage)
+    {
+        base.TakePiercingDamage(damage);
+        healthUI.UpdateUI(currentHp, maxHp);
+    }
+
     protected override void Die()
     {
         base.Die();
