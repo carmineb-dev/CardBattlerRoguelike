@@ -874,6 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   player: {fileID: 1636317851}
+  playerBlockUI: {fileID: 1709937201}
   enemy: {fileID: 980263919}
 --- !u!1 &398663470
 GameObject:
@@ -1980,6 +1981,9 @@ MonoBehaviour:
   hasFuryNextAttack: 0
   damageMultiplier: 1
   healPopup: {fileID: 0}
+  ironWallTurns: 0
+  ironWallBlockPerTurn: 0
+  skipTurns: 0
   healthUI: {fileID: 533079830}
 --- !u!224 &980263920
 RectTransform:
@@ -2113,14 +2117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Deck
   startingDeck:
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
-  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
   - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
-  - {fileID: 11400000, guid: 5ede1aa8b35753b41973c29082767597, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
+  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: 235104d3c0517ac409ddc489f7594790, type: 2}
+  - {fileID: 11400000, guid: 235104d3c0517ac409ddc489f7594790, type: 2}
   drawPile: []
   discardPile: []
 --- !u!1 &1043945454
@@ -3229,6 +3233,9 @@ MonoBehaviour:
   hasFuryNextAttack: 0
   damageMultiplier: 1
   healPopup: {fileID: 1138188927}
+  ironWallTurns: 0
+  ironWallBlockPerTurn: 0
+  skipTurns: 0
   healthUI: {fileID: 763278245}
   manaUI: {fileID: 1751825933}
   blockUI: {fileID: 1709937201}

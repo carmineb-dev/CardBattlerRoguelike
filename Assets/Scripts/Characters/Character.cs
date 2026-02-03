@@ -29,6 +29,14 @@ public abstract class Character : MonoBehaviour
     public int damageMultiplier = 1;
     [SerializeField] private HealPopup healPopup;
 
+    // === TURN BASED BUFFS ===
+    [Header("Turn-Based Buffs")]
+    public int ironWallTurns = 0; // Iron Wall
+
+    public int ironWallBlockPerTurn = 0;
+
+    public int skipTurns = 0; // Time Warp
+
     public abstract void Initialize();
 
     // === DAMAGE PIPELINE ===

@@ -12,6 +12,8 @@ public class CombatManager : MonoBehaviour
 
     public Player Player => player;
 
+    [SerializeField] private PlayerBlockUI playerBlockUI;
+
     [SerializeField] private Enemy enemy;
     public Enemy Enemy => enemy;
 
@@ -70,8 +72,16 @@ public class CombatManager : MonoBehaviour
         Debug.Log("=== RESOLUTION PHASE END ===");
 
         // Enemy turn (placeholder)
-        Player.TakeDamage(5);
-        Debug.Log("Enemy attacked for 5 damage");
+        if (Enemy.skipTurns > 0)
+        {
+            Debug.Log("Enemy turn skipped!");
+            // Don't call enemy AI
+        }
+        else
+        {
+            Player.TakeDamage(5);
+            Debug.Log("Enemy attacked for 5 damage");
+        }
 
         yield return new WaitForSeconds(0.3f);
 
@@ -79,6 +89,9 @@ public class CombatManager : MonoBehaviour
         Player.ResetBlock();
         Enemy.ResetBlock();
         Player.RefillMana();
+
+        // Process turn-based buffs
+        ProcessTurnBuffs();
 
         // Draw back to 5 cards if possible
         int cardsToDraw = 5 - Hand.Instance.CardCount;
@@ -129,6 +142,26 @@ public class CombatManager : MonoBehaviour
             {
                 Destroy(card.gameObject);
             }
+        }
+    }
+
+    private void ProcessTurnBuffs()
+    {
+        // Iron Wall regen
+        if (Player.ironWallTurns > 0)
+        {
+            Player.GainBlock(Player.ironWallBlockPerTurn);
+            playerBlockUI.UpdateUI(Player.ironWallBlockPerTurn);
+            Player.ironWallTurns--;
+            Debug.Log($"Iron Wall: +{Player.ironWallBlockPerTurn} block ({Player.ironWallTurns} turns left)");
+        }
+
+        // Enemy skip check (Time Warp)
+        if (Enemy.skipTurns > 0)
+        {
+            Enemy.skipTurns--;
+            Debug.Log($"Enemy skipped turn ({Enemy.skipTurns} skips left");
+            // TODO: Skip enemy AI logic
         }
     }
 }
