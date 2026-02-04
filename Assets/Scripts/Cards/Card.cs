@@ -89,6 +89,26 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
         // Target is the opposite of the caster
         Character target = GetOpponent(caster);
 
+        // Calculate final priority
+        int finalPriority = cardData.Priority;
+
+        // Apply priority boost if possible
+        if (caster.priorityBoostRemaining > 0)
+        {
+            finalPriority -= caster.priorityBoostValue;
+
+            // Decrement only if is not active parry card effect
+            if (!caster.hasParryActive)
+            {
+                caster.priorityBoostRemaining--;
+            }
+
+            // Visual feedback
+            priorityText.color = Color.yellow;
+            priorityText.text = finalPriority.ToString();
+            Debug.Log($"{cardData.Name} boosted: {cardData.Priority}->{finalPriority}");
+        }
+
         // Check mana cost
         if (caster.currentMana >= cardData.Cost)
         {
@@ -104,7 +124,7 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
             }
 
             // Queue card effect
-            CombatManager.Instance.QueueCard(this, caster, target);
+            CombatManager.Instance.QueueCard(this, caster, target, finalPriority);
 
             // Visual feedback of the played card
             CanvasGroup cg = GetComponent<CanvasGroup>();

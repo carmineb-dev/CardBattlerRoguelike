@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100c6d9b8646c634988ece0fca0dc84c, type: 3}
-  m_Name: Parry
+  m_Name: Haste
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Parry
-  cardDescription: Gain 3 block, -1 priority next turn
-  cardCost: 0
-  cardPriority: 1
-  cardCategory: 1
-  effect: {fileID: 11400000, guid: 7680bcc6db0464d4bb91923fa557eef4, type: 2}
+  cardName: Haste
+  cardDescription: Next 2 cards gain -1 priority
+  cardCost: 1
+  cardPriority: 2
+  cardCategory: 2
+  effect: {fileID: 11400000, guid: 58ca201c19da0b5419cd43cf255ad150, type: 2}
   value: 0

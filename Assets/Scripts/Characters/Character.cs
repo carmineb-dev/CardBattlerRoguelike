@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -37,6 +38,17 @@ public abstract class Character : MonoBehaviour
 
     public int skipTurns = 0; // Time Warp
 
+    public int priorityBoostRemaining = 0; // How many cards left
+    public int priorityBoostValue = 0; // How much boost (-1 = faster)
+    public bool hasParryActive = false;
+    public bool parryActivatedThisTurn = false;
+
+    // === COUNTER STANCE ===
+    public bool hasCounterStance = false;
+
+    public int counterStanceDamage = 0;
+    public Character lastAttacker;
+
     public abstract void Initialize();
 
     // === DAMAGE PIPELINE ===
@@ -45,6 +57,15 @@ public abstract class Character : MonoBehaviour
     // === DAMAGE ===
     public virtual void TakeDamage(int damage)
     {
+        // Counter stance trigger
+        if (hasCounterStance && lastAttacker != null)
+        {
+            Debug.Log("Counter stance triggered!");
+
+            DealDamage(lastAttacker, counterStanceDamage);
+            hasCounterStance = false;
+        }
+
         if (negateNextAttack)
         {
             Debug.Log($"{characterName} negated attack!");
@@ -137,6 +158,10 @@ public abstract class Character : MonoBehaviour
         {
             damage = step.Process(damage, this, target);
         }
+
+        // Memorize the attacker
+        target.lastAttacker = this;
+
         target.TakeDamage(damage);
         CleanupPipeline();
     }

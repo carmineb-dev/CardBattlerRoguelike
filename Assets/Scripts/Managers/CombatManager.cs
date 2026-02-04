@@ -46,7 +46,7 @@ public class CombatManager : MonoBehaviour
         Debug.Log("=== RESOLUTION PHASE START ===");
 
         // Sort cards by priority
-        cardsToResolve.Sort((a, b) => a.cardData.Priority.CompareTo(b.cardData.Priority));
+        cardsToResolve.Sort((a, b) => a.resolvedPriority.CompareTo(b.resolvedPriority));
 
         // Execute cards in order
         foreach (CardPlayData playData in cardsToResolve)
@@ -79,7 +79,7 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            Player.TakeDamage(5);
+            Enemy.DealDamage(Player, 5);
             Debug.Log("Enemy attacked for 5 damage");
         }
 
@@ -92,6 +92,10 @@ public class CombatManager : MonoBehaviour
 
         // Process turn-based buffs
         ProcessTurnBuffs();
+
+        // Reset counter stance
+        Player.hasCounterStance = false;
+        Enemy.hasCounterStance = false;
 
         // Draw back to 5 cards if possible
         int cardsToDraw = 5 - Hand.Instance.CardCount;
@@ -109,7 +113,7 @@ public class CombatManager : MonoBehaviour
         Debug.Log("=== NEW TURN START ===");
     }
 
-    public void QueueCard(Card cardInstance, Character caster, Character target)
+    public void QueueCard(Card cardInstance, Character caster, Character target, int finalPriority)
     {
         CardPlayData playData = new CardPlayData
         {
@@ -117,6 +121,7 @@ public class CombatManager : MonoBehaviour
             cardInstance = cardInstance,
             caster = caster,
             target = target,
+            resolvedPriority = finalPriority
         };
 
         cardsToResolve.Add(playData);
@@ -129,6 +134,7 @@ public class CombatManager : MonoBehaviour
         public Card cardInstance; // Reference to the UI object
         public Character caster;
         public Character target;
+        public int resolvedPriority;
     }
 
     private void DestroyPlayedCards()
@@ -162,6 +168,24 @@ public class CombatManager : MonoBehaviour
             Enemy.skipTurns--;
             Debug.Log($"Enemy skipped turn ({Enemy.skipTurns} skips left");
             // TODO: Skip enemy AI logic
+        }
+
+        // Reset priority boost
+        if (Player.hasParryActive && !Player.parryActivatedThisTurn)
+        {
+            Player.priorityBoostRemaining = 0;
+            Player.hasParryActive = false;
+        }
+        if (Player.parryActivatedThisTurn)
+        {
+            Player.parryActivatedThisTurn = false;
+        }
+
+        if (Enemy.hasParryActive)
+        {
+            Enemy.priorityBoostRemaining = 0;
+            Enemy.priorityBoostValue = 0;
+            Enemy.hasParryActive = false;
         }
     }
 }

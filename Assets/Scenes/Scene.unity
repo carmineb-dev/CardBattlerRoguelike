@@ -1984,6 +1984,13 @@ MonoBehaviour:
   ironWallTurns: 0
   ironWallBlockPerTurn: 0
   skipTurns: 0
+  priorityBoostRemaining: 0
+  priorityBoostValue: 0
+  hasParryActive: 0
+  parryActivatedThisTurn: 0
+  hasCounterStance: 0
+  counterStanceDamage: 0
+  lastAttacker: {fileID: 0}
   healthUI: {fileID: 533079830}
 --- !u!224 &980263920
 RectTransform:
@@ -2116,12 +2123,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Deck
   startingDeck:
-  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: 7932b93d069bf2246bd570ad5f21ea45, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: 203aef71eb2356d4ca5227bf83762053, type: 2}
+  - {fileID: 11400000, guid: 203aef71eb2356d4ca5227bf83762053, type: 2}
+  - {fileID: 11400000, guid: 203aef71eb2356d4ca5227bf83762053, type: 2}
+  - {fileID: 11400000, guid: 203aef71eb2356d4ca5227bf83762053, type: 2}
+  - {fileID: 11400000, guid: 203aef71eb2356d4ca5227bf83762053, type: 2}
+  - {fileID: 11400000, guid: 203aef71eb2356d4ca5227bf83762053, type: 2}
   - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   - {fileID: 11400000, guid: 235104d3c0517ac409ddc489f7594790, type: 2}
   - {fileID: 11400000, guid: 235104d3c0517ac409ddc489f7594790, type: 2}
@@ -3236,6 +3243,13 @@ MonoBehaviour:
   ironWallTurns: 0
   ironWallBlockPerTurn: 0
   skipTurns: 0
+  priorityBoostRemaining: 0
+  priorityBoostValue: 0
+  hasParryActive: 0
+  parryActivatedThisTurn: 0
+  hasCounterStance: 0
+  counterStanceDamage: 0
+  lastAttacker: {fileID: 0}
   healthUI: {fileID: 763278245}
   manaUI: {fileID: 1751825933}
   blockUI: {fileID: 1709937201}
