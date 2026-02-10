@@ -79,8 +79,19 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            Enemy.DealDamage(Player, 5);
-            Debug.Log("Enemy attacked for 5 damage");
+            CardData enemyCard = Enemy.ChooseRandomCard();
+            if (enemyCard != null)
+            {
+                // Enemy plays card
+                Debug.Log($"Enemy plays: {enemyCard.Name}");
+
+                // Execute effect (enemy = caster, player = target)
+                enemyCard.Effect.Execute(Enemy, Player, enemyCard.Value);
+            }
+            else
+            {
+                Debug.Log("Enemy has no cards to play!");
+            }
         }
 
         yield return new WaitForSeconds(0.3f);

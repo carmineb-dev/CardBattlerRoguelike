@@ -61,9 +61,8 @@ public abstract class Character : MonoBehaviour
         if (hasCounterStance && lastAttacker != null)
         {
             Debug.Log("Counter stance triggered!");
-
-            DealDamage(lastAttacker, counterStanceDamage);
             hasCounterStance = false;
+            DealDamage(lastAttacker, counterStanceDamage);
         }
 
         if (negateNextAttack)
