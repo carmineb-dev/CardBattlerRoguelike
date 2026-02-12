@@ -745,12 +745,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeck
   startingDeck:
-  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
-  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
-  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
-  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
-  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
-  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   drawPile: []
   discardPile: []
 --- !u!224 &281374567
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   characterName: 
   maxHp: 50
-  maxMana: 0
+  maxMana: 3
   baseMaxMana: 0
   negateNextAttack: 0
   nextCardFree: 0
@@ -2181,14 +2181,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Deck
   startingDeck:
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
-  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
   drawPile: []
   discardPile: []

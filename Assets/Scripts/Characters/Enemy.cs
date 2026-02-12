@@ -57,22 +57,67 @@ public class Enemy : Character
         Debug.Log("Enemy defeated!");
     }
 
-    public CardData ChooseRandomCard()
+    public List<CardData> ChooseCardsToPlay()
     {
-        if (enemyHand.Count == 0)
+        List<CardData> cardsToPlay = new List<CardData>();
+
+        // Play cards until mana is finished
+        while (currentMana > 0 && enemyHand.Count > 0)
         {
-            Debug.Log("Enemy has no cards!");
-            return null;
+            // Filter playable cards (cost <= mana)
+            List<CardData> playableCards = new List<CardData>();
+
+            foreach (CardData card in enemyHand)
+            {
+                if (card.Cost <= currentMana)
+                {
+                    playableCards.Add(card);
+                }
+            }
+
+            // No playable cards -> stop
+            if (playableCards.Count == 0)
+            {
+                break;
+            }
+
+            // Pick random playable card
+            int randomIndex = Random.Range(0, playableCards.Count);
+            CardData chosenCard = playableCards[randomIndex];
+
+            // Add card to play list
+            cardsToPlay.Add(chosenCard);
+
+            // Remove from hand
+            enemyHand.Remove(chosenCard);
+
+            // Spend mana
+            SpendMana(chosenCard.Cost);
+
+            Debug.Log($"Enemy queued: {chosenCard.Name} (Cost: {chosenCard.Cost})");
         }
 
-        // Pick random card
-        int randomIndex = Random.Range(0, enemyHand.Count);
-        CardData chosenCard = enemyHand[randomIndex];
+        Debug.Log($"Enemy chose {cardsToPlay.Count} cards to play");
+        return cardsToPlay;
+    }
 
-        // Remove from hand
-        enemyHand.RemoveAt(randomIndex);
+    public void DrawToHandSize(int targetSize)
+    {
+        int cardsToDraw = targetSize - enemyHand.Count;
 
-        Debug.Log($"Enemy chose: {chosenCard.Name}");
-        return chosenCard;
+        for (int i = 0; i < cardsToDraw; i++)
+        {
+            CardData card = EnemyDeck.Instance.Draw();
+            if (card != null)
+            {
+                enemyHand.Add(card);
+            }
+            else
+            {
+                Debug.LogWarning("Enemy deck empty!");
+                break;
+            }
+        }
+        Debug.Log($"Enemy drew {cardsToDraw} cards, hand size: {enemyHand.Count}");
     }
 }

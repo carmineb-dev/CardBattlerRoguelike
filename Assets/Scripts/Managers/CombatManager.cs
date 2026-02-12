@@ -38,6 +38,25 @@ public class CombatManager : MonoBehaviour
 
     public void EndTurn()
     {
+        // ENEMY TURN
+        // Enemy turn (placeholder)
+        if (Enemy.skipTurns > 0)
+        {
+            Debug.Log("Enemy turn skipped!");
+            // Don't call enemy AI
+        }
+        else
+        {
+            List<CardData> enemyCards = Enemy.ChooseCardsToPlay();
+
+            // Queue enemy cards (same as player)
+            foreach (CardData card in enemyCards)
+            {
+                // For now create fake card instance using null
+                QueueEnemyCard(card, card.Priority);
+            }
+        }
+        // RESOLUTION
         StartCoroutine(ResolveTurn());
     }
 
@@ -57,7 +76,7 @@ public class CombatManager : MonoBehaviour
             playData.cardData.Effect.Execute(playData.caster, playData.target, playData.cardData.Value);
 
             // Remove from hand if player
-            if (playData.caster == Player)
+            if (playData.cardInstance != null && playData.caster == Player)
             {
                 Hand.Instance.RemoveCard(playData.cardInstance);
             }
@@ -71,35 +90,13 @@ public class CombatManager : MonoBehaviour
 
         Debug.Log("=== RESOLUTION PHASE END ===");
 
-        // Enemy turn (placeholder)
-        if (Enemy.skipTurns > 0)
-        {
-            Debug.Log("Enemy turn skipped!");
-            // Don't call enemy AI
-        }
-        else
-        {
-            CardData enemyCard = Enemy.ChooseRandomCard();
-            if (enemyCard != null)
-            {
-                // Enemy plays card
-                Debug.Log($"Enemy plays: {enemyCard.Name}");
-
-                // Execute effect (enemy = caster, player = target)
-                enemyCard.Effect.Execute(Enemy, Player, enemyCard.Value);
-            }
-            else
-            {
-                Debug.Log("Enemy has no cards to play!");
-            }
-        }
-
         yield return new WaitForSeconds(0.3f);
 
         // Cleanup turn
         Player.ResetBlock();
         Enemy.ResetBlock();
         Player.RefillMana();
+        Enemy.RefillMana();
 
         // Process turn-based buffs
         ProcessTurnBuffs();
@@ -110,6 +107,7 @@ public class CombatManager : MonoBehaviour
 
         // Draw back to 5 cards if possible
         int cardsToDraw = 5 - Hand.Instance.CardCount;
+
         for (int i = 0; i < cardsToDraw; i++)
         {
             // Safety check: if deck is empty, stop
@@ -118,8 +116,11 @@ public class CombatManager : MonoBehaviour
                 Debug.LogWarning("No more cards to draw!");
                 break;
             }
+
             Deck.Instance.DrawCard();
         }
+        // Enemy draw back to 5
+        Enemy.DrawToHandSize(5);
 
         Debug.Log("=== NEW TURN START ===");
     }
@@ -128,14 +129,29 @@ public class CombatManager : MonoBehaviour
     {
         CardPlayData playData = new CardPlayData
         {
-            cardData = cardInstance.cardData,
-            cardInstance = cardInstance,
+            cardData = cardInstance != null ? cardInstance.cardData : null, // Handle null
+            cardInstance = cardInstance, // Can be null
             caster = caster,
             target = target,
             resolvedPriority = finalPriority
         };
 
         cardsToResolve.Add(playData);
+    }
+
+    public void QueueEnemyCard(CardData cardData, int priority)
+    {
+        CardPlayData playData = new CardPlayData
+        {
+            cardData = cardData,
+            cardInstance = null, // Enemy has no Card UI
+            caster = Enemy,
+            target = Player,
+            resolvedPriority = priority
+        };
+
+        cardsToResolve.Add(playData);
+        Debug.Log($"Enemy queued: {cardData.Name} (Priority {priority})");
     }
 
     [System.Serializable]
