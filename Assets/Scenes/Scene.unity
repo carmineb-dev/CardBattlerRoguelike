@@ -745,6 +745,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeck
   startingDeck:
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
   - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
@@ -2049,6 +2063,7 @@ MonoBehaviour:
   counterStanceDamage: 0
   lastAttacker: {fileID: 0}
   healthUI: {fileID: 533079830}
+  strategy: 2
 --- !u!224 &980263920
 RectTransform:
   m_ObjectHideFlags: 0

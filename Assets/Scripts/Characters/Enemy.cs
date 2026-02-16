@@ -2,6 +2,13 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyStrategy
+{
+    Random,
+    Aggressive, // Attack based
+    Defensive   // Defense based
+}
+
 public class Enemy : Character
 {
     // === UI ===
@@ -9,6 +16,9 @@ public class Enemy : Character
 
     // === HAND ===
     private List<CardData> enemyHand = new List<CardData>();
+
+    // === STRATEGY ===
+    [SerializeField] private EnemyStrategy strategy = EnemyStrategy.Random;
 
     private void Awake()
     {
@@ -81,9 +91,28 @@ public class Enemy : Character
                 break;
             }
 
-            // Pick random playable card
-            int randomIndex = Random.Range(0, playableCards.Count);
-            CardData chosenCard = playableCards[randomIndex];
+            // Choose card based on strategy
+            CardData chosenCard = null;
+
+            switch (strategy)
+            {
+                case EnemyStrategy.Random:
+                    chosenCard = ChooseRandom(playableCards);
+                    break;
+
+                case EnemyStrategy.Aggressive:
+                    chosenCard = ChooseAggressive(playableCards);
+                    break;
+
+                case EnemyStrategy.Defensive:
+                    chosenCard = ChooseDefensive(playableCards);
+                    break;
+            }
+
+            if (chosenCard == null)
+            {
+                break;
+            }
 
             // Add card to play list
             cardsToPlay.Add(chosenCard);
@@ -94,13 +123,91 @@ public class Enemy : Character
             // Spend mana
             SpendMana(chosenCard.Cost);
 
-            Debug.Log($"Enemy queued: {chosenCard.Name} (Cost: {chosenCard.Cost})");
+            Debug.Log($"Enemy [{strategy} queued: {chosenCard.Name}]");
         }
 
         Debug.Log($"Enemy chose {cardsToPlay.Count} cards to play");
         return cardsToPlay;
     }
 
+    // === STRATEGY METHODS ===
+    private CardData ChooseRandom(List<CardData> playableCards)
+    {
+        int randomIndex = Random.Range(0, playableCards.Count);
+        return playableCards[randomIndex];
+    }
+
+    private CardData ChooseAggressive(List<CardData> playableCards)
+    {
+        // Priority: Attack > Utility > Defense
+
+        // If hp < 30% -> emergency defense
+        float hpPercent = (float)currentHp / maxHp;
+
+        if (hpPercent < 0.3f)
+        {
+            // Search defense card
+            CardData defenseCard = playableCards.Find(c => c.Category == CardCategory.Defense);
+            if (defenseCard != null)
+            {
+                Debug.Log("Aggressive AI: Emergency defense!");
+                return defenseCard;
+            }
+        }
+
+        // Prefer attack cards
+        List<CardData> attackCards = playableCards.FindAll(c => c.Category == CardCategory.Attack);
+        if (attackCards.Count > 0)
+        {
+            return attackCards[Random.Range(0, attackCards.Count)];
+        }
+
+        // Fallback: utility
+        List<CardData> utilityCards = playableCards.FindAll(c => c.Category == CardCategory.Utility);
+        if (utilityCards.Count > 0)
+        {
+            return utilityCards[Random.Range(0, utilityCards.Count)];
+        }
+
+        // Last fallback : random
+        return ChooseRandom(playableCards);
+    }
+
+    private CardData ChooseDefensive(List<CardData> playableCards)
+    {
+        // Priority: Balanced, but prefer defense when hp is low
+
+        float hpPercent = (float)currentHp / maxHp;
+
+        // If hp < 50% -> defense priority
+        if (hpPercent < 0.5f)
+        {
+            List<CardData> defenseCards = playableCards.FindAll(c => c.Category == CardCategory.Defense);
+            if (defenseCards.Count > 0)
+            {
+                Debug.Log("Defensive AI: HP low, defending!");
+                return defenseCards[Random.Range(0, defenseCards.Count)];
+            }
+        }
+
+        // Else prefers attack 60% or defense/utility 40%
+        float roll = Random.value;
+
+        if (roll < 0.6f)
+        {
+            // Try attack
+            List<CardData> attackCards = playableCards.FindAll(c => c.Category == CardCategory.Attack);
+            if (attackCards.Count > 0)
+            {
+                return attackCards[Random.Range(0, attackCards.Count)];
+            }
+        }
+
+        // Fallback: random card
+        return ChooseRandom(playableCards);
+    }
+
+    // === DRAW METHOD ===
     public void DrawToHandSize(int targetSize)
     {
         int cardsToDraw = targetSize - enemyHand.Count;
