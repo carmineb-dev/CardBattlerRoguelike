@@ -14,6 +14,8 @@ public class Enemy : Character
     // === UI ===
     [SerializeField] private EnemyHealthUI healthUI;
 
+    [SerializeField] private EnemyHandUI handUI;
+
     // === HAND ===
     private List<CardData> enemyHand = new List<CardData>();
 
@@ -127,6 +129,13 @@ public class Enemy : Character
         }
 
         Debug.Log($"Enemy chose {cardsToPlay.Count} cards to play");
+
+        // Update UI
+        if (handUI != null)
+        {
+            handUI.UpdateHandCount(enemyHand.Count);
+        }
+
         return cardsToPlay;
     }
 
@@ -210,7 +219,7 @@ public class Enemy : Character
     // === DRAW METHOD ===
     public void DrawToHandSize(int targetSize)
     {
-        int cardsToDraw = targetSize - enemyHand.Count;
+        int cardsToDraw = Mathf.Max(targetSize - enemyHand.Count, 0);
 
         for (int i = 0; i < cardsToDraw; i++)
         {
@@ -226,5 +235,27 @@ public class Enemy : Character
             }
         }
         Debug.Log($"Enemy drew {cardsToDraw} cards, hand size: {enemyHand.Count}");
+
+        // Update UI
+        handUI.UpdateHandCount(enemyHand.Count);
+    }
+
+    public void DrawCards(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            CardData card = EnemyDeck.Instance.Draw();
+            if (card != null)
+            {
+                enemyHand.Add(card);
+            }
+        }
+
+        // Update UI
+        if (handUI != null)
+        {
+            handUI.UpdateHandCount(enemyHand.Count);
+        }
+        Debug.Log($"Enemy drew {count} cards, hand: {enemyHand.Count}");
     }
 }

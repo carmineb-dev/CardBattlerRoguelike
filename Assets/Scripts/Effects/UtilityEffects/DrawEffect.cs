@@ -15,8 +15,11 @@ public class DrawEffect : CardEffect
         }
         else
         {
-            // Enemy draw placeholder
-            Debug.Log($"Enemy drew {value} cards");
+            Enemy enemy = caster as Enemy;
+            if (enemy != null)
+            {
+                enemy.DrawCards(value);
+            }
         }
     }
 }
