@@ -576,6 +576,7 @@ RectTransform:
   - {fileID: 419593061}
   - {fileID: 533079828}
   - {fileID: 1968225082}
+  - {fileID: 728597811}
   m_Father: {fileID: 2106889926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -746,26 +747,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeck
   startingDeck:
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
-  - {fileID: 11400000, guid: fa07749d6d42d9e4c91dc203a600f856, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
+  - {fileID: 11400000, guid: 1728f5e3db39afa42b229668bffd37ef, type: 2}
   drawPile: []
   discardPile: []
 --- !u!224 &281374567
@@ -946,8 +937,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   player: {fileID: 1636317851}
-  playerBlockUI: {fileID: 1709937201}
   enemy: {fileID: 980263919}
+  playerBlockUI: {fileID: 1709937201}
+  enemyIntentUI: {fileID: 728597814}
 --- !u!1 &398663470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 292}
+  m_AnchoredPosition: {x: 0, y: 280}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &419593062
@@ -1471,7 +1463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 442}
+  m_AnchoredPosition: {x: 0, y: 170}
   m_SizeDelta: {x: 245.8851, y: 85.4317}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &533079829
@@ -1539,6 +1531,98 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthUI
   healthSlider: {fileID: 533079829}
   healthText: {fileID: 398663472}
+--- !u!1 &728597810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 728597811}
+  - component: {fileID: 728597813}
+  - component: {fileID: 728597812}
+  - component: {fileID: 728597814}
+  m_Layer: 5
+  m_Name: EnemyIntentIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &728597811
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728597810}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238168163}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 441}
+  m_SizeDelta: {x: 32, y: 32}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &728597812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728597810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &728597813
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728597810}
+  m_CullTransparentMesh: 1
+--- !u!114 &728597814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728597810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc53fece9b8710498ef2f70c76ff7bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIntentUI
+  intentIcon: {fileID: 728597812}
+  attackIcon: {fileID: 8197242436548089910, guid: f52fd4de274091044be13e9c62769cc0, type: 3}
+  defendIcon: {fileID: -9074139783313972715, guid: 33440d90764cdf1449d250e6797eedc8, type: 3}
+  utilityIcon: {fileID: -5650029936236462502, guid: fbe69f59c4852e449a134c406d10b849, type: 3}
 --- !u!1 &763278244
 GameObject:
   m_ObjectHideFlags: 0
@@ -4507,7 +4591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 170}
+  m_AnchoredPosition: {x: 0, y: 392}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1968225083

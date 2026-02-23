@@ -7,15 +7,18 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance;
 
-    // === REFERENCES ===
+    // === CHARACTERS ===
     [SerializeField] private Player player;
 
     public Player Player => player;
 
-    [SerializeField] private PlayerBlockUI playerBlockUI;
-
     [SerializeField] private Enemy enemy;
     public Enemy Enemy => enemy;
+
+    // === UI ===
+    [SerializeField] private PlayerBlockUI playerBlockUI;
+
+    [SerializeField] private EnemyIntentUI enemyIntentUI;
 
     private List<CardPlayData> cardsToResolve = new List<CardPlayData>();
 
@@ -34,28 +37,29 @@ public class CombatManager : MonoBehaviour
     {
         player.Initialize();
         enemy.Initialize();
+
+        // === Enemy prechoose for turn 1===
+        Enemy.PreChooseCardsForTurn();
+        enemyIntentUI.ShowIntent(Enemy.GetPreChosenCards());
+
+        Debug.Log("Combat initialized - Enemy intent shown for Turn 1");
     }
 
     public void EndTurn()
     {
-        // ENEMY TURN
-        // Enemy turn (placeholder)
-        if (Enemy.skipTurns > 0)
-        {
-            Debug.Log("Enemy turn skipped!");
-            // Don't call enemy AI
-        }
-        else
-        {
-            List<CardData> enemyCards = Enemy.ChooseCardsToPlay();
+        List<CardData> enemyCards = Enemy.GetPreChosenCards();
 
-            // Queue enemy cards (same as player)
-            foreach (CardData card in enemyCards)
-            {
-                // For now create fake card instance using null
-                QueueEnemyCard(card, card.Priority);
-            }
+        // Queue enemy cards (same as player)
+        foreach (CardData card in enemyCards)
+        {
+            // For now create fake card instance using null
+            QueueEnemyCard(card, card.Priority);
         }
+
+        enemyIntentUI.HideIntent();
+
+        Enemy.ClearPreChosenCards();
+
         // RESOLUTION
         StartCoroutine(ResolveTurn());
     }
@@ -87,6 +91,9 @@ public class CombatManager : MonoBehaviour
         // Clear resolved cards
         cardsToResolve.Clear();
         DestroyPlayedCards();
+
+        // Hide intent after resolution
+        enemyIntentUI.HideIntent();
 
         Debug.Log("=== RESOLUTION PHASE END ===");
 
@@ -121,6 +128,20 @@ public class CombatManager : MonoBehaviour
         }
         // Enemy draw back to 5
         Enemy.DrawToHandSize(5);
+
+        // ENEMY TURN
+        // Enemy turn (placeholder)
+        if (Enemy.skipTurns > 0)
+        {
+            Debug.Log("Enemy turn skipped!");
+            enemyIntentUI.HideIntent();
+            // Don't call enemy AI
+        }
+        else
+        {
+            Enemy.PreChooseCardsForTurn();
+            enemyIntentUI.ShowIntent(Enemy.GetPreChosenCards());
+        }
 
         Debug.Log("=== NEW TURN START ===");
     }

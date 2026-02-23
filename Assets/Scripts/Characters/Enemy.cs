@@ -19,6 +19,8 @@ public class Enemy : Character
     // === HAND ===
     private List<CardData> enemyHand = new List<CardData>();
 
+    private List<CardData> preChosenCards = new List<CardData>();
+
     // === STRATEGY ===
     [SerializeField] private EnemyStrategy strategy = EnemyStrategy.Random;
 
@@ -67,6 +69,23 @@ public class Enemy : Character
     {
         base.Die();
         Debug.Log("Enemy defeated!");
+    }
+
+    // === CHOOSE CARDS METHODS ===
+    public void PreChooseCardsForTurn()
+    {
+        // Choose cards before player plays cards
+        preChosenCards = ChooseCardsToPlay();
+    }
+
+    public List<CardData> GetPreChosenCards()
+    {
+        return preChosenCards;
+    }
+
+    public void ClearPreChosenCards()
+    {
+        preChosenCards.Clear();
     }
 
     public List<CardData> ChooseCardsToPlay()
