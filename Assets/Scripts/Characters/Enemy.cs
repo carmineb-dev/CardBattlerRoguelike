@@ -16,6 +16,8 @@ public class Enemy : Character
 
     [SerializeField] private EnemyHandUI handUI;
 
+    [SerializeField] private EnemyBlockUI blockUI;
+
     // === HAND ===
     private List<CardData> enemyHand = new List<CardData>();
 
@@ -56,6 +58,7 @@ public class Enemy : Character
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
+        blockUI.UpdateUI(currentBlock);
         healthUI.UpdateUI(currentHp, maxHp);
     }
 
@@ -69,6 +72,32 @@ public class Enemy : Character
     {
         base.Die();
         Debug.Log("Enemy defeated!");
+    }
+
+    // === HEAL ===
+    public override void Heal(int amount)
+    {
+        base.Heal(amount);
+        healthUI.UpdateUI(currentHp, maxHp);
+    }
+
+    // === BLOCK ===
+    public override void GainBlock(int amount)
+    {
+        base.GainBlock(amount);
+        if (blockUI != null)
+        {
+            blockUI.UpdateUI(currentBlock);
+        }
+    }
+
+    public override void ResetBlock()
+    {
+        base.ResetBlock();
+        if (blockUI != null)
+        {
+            blockUI.UpdateUI(currentBlock);
+        }
     }
 
     // === CHOOSE CARDS METHODS ===

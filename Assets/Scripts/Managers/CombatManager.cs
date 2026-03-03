@@ -69,7 +69,17 @@ public class CombatManager : MonoBehaviour
         Debug.Log("=== RESOLUTION PHASE START ===");
 
         // Sort cards by priority
-        cardsToResolve.Sort((a, b) => a.resolvedPriority.CompareTo(b.resolvedPriority));
+        cardsToResolve.Sort((a, b) =>
+        {
+            int priorityCompare = a.resolvedPriority.CompareTo(b.resolvedPriority);
+
+            // If priority is the same -> random coinflip
+            if (priorityCompare == 0)
+            {
+                return Random.Range(0, 2) == 0 ? -1 : 1;
+            }
+            return priorityCompare;
+        });
 
         // Execute cards in order
         foreach (CardPlayData playData in cardsToResolve)

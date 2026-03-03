@@ -128,7 +128,7 @@ public abstract class Character : MonoBehaviour
         currentHp = Mathf.Clamp(currentHp + amount, 0, maxHp);
         int healedHp = currentHp - hpBefore;
 
-        if (healedHp > 0)
+        if (healedHp > 0 && healPopup != null)
         {
             healPopup.ShowHeal(healedHp);
         }
