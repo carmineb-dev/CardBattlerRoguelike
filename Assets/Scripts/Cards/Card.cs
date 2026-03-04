@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
     [SerializeField] private TextMeshProUGUI costText;
     [SerializeField] private TextMeshProUGUI priorityText;
     [SerializeField] private Image background;
+
+    private bool isPlayed;
 
     private Vector3 originalScale;
 
@@ -126,11 +129,15 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
             // Queue card effect
             CombatManager.Instance.QueueCard(this, caster, target, finalPriority);
 
+            isPlayed = true;
+
             // Visual feedback of the played card
             CanvasGroup cg = GetComponent<CanvasGroup>();
-            cg.alpha = 0.5f; // Gray out
             cg.interactable = false; // Not clickable anymore
             cg.blocksRaycasts = false;
+
+            // Slide animation
+            StartCoroutine(SlideToCenter());
         }
         else
         {
@@ -147,6 +154,43 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
         else
         {
             return CombatManager.Instance.Player;
+        }
+    }
+
+    public bool IsPlayed()
+    {
+        return isPlayed;
+    }
+
+    // === SLIDE ANIMATION ===
+    private IEnumerator SlideToCenter()
+    {
+        Vector3 startPos = transform.position;
+
+        // Choose position
+        float xPos = Screen.width * 0.2f;
+        float yPos = Screen.height / 2f;
+        Vector3 targetPos = new Vector3(xPos, yPos, startPos.z);
+
+        float duration = 0.3f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            // Slide position
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+
+            yield return null;
+        }
+        transform.position = targetPos;
+
+        Canvas mainCanvas = GetComponentInParent<Canvas>();
+        if (mainCanvas != null)
+        {
+            transform.SetParent(mainCanvas.transform, true);
         }
     }
 }

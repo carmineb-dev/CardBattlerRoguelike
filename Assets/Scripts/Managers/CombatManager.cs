@@ -95,8 +95,8 @@ public class CombatManager : MonoBehaviour
                 Hand.Instance.RemoveCard(playData.cardInstance);
             }
 
-            //Pause for visual feedback
-            yield return new WaitForSeconds(0.5f);
+            // Pause for visual feedback
+            yield return new WaitForSeconds(1f);
         }
         // Clear resolved cards
         cardsToResolve.Clear();
@@ -201,8 +201,7 @@ public class CombatManager : MonoBehaviour
         Card[] allCards = FindObjectsByType<Card>(FindObjectsSortMode.None);
         foreach (Card card in allCards)
         {
-            CanvasGroup cg = card.GetComponent<CanvasGroup>();
-            if (cg != null && cg.alpha < 1f)
+            if (card.IsPlayed())
             {
                 Destroy(card.gameObject);
             }
