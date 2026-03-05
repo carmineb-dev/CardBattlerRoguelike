@@ -103,10 +103,14 @@ public class CombatManager : MonoBehaviour
             // Execute effect
             playData.cardData.Effect.Execute(playData.caster, playData.target, playData.cardData.Value);
 
-            // Remove from hand if player
-            if (playData.cardInstance != null && playData.caster == Player)
+            // Fade out cards
+            if (playData.cardInstance != null)
             {
-                Hand.Instance.RemoveCard(playData.cardInstance);
+                // Remove from hand if is player
+                if (playData.caster == Player)
+                {
+                    Hand.Instance.RemoveCard(playData.cardInstance);
+                }
                 playData.cardInstance.TriggerFadeOut();
             }
 
@@ -187,16 +191,32 @@ public class CombatManager : MonoBehaviour
 
     public void QueueEnemyCard(CardData cardData, int priority)
     {
+        // Spawn Card UI for enemy
+        GameObject cardObj = Instantiate(Hand.Instance.cardPrefab);
+        Card cardScript = cardObj.GetComponent<Card>();
+
+        // Initialize enemy card data
+        cardScript.Initialize(cardData, Enemy);
+
+        // Starting position (outside the screen)
+        Canvas mainCanvas = FindFirstObjectByType<Canvas>();
+        cardScript.transform.SetParent(mainCanvas.transform);
+        cardScript.transform.position = new Vector3(Screen.width + 200, Screen.height / 2f, 0);
+
         CardPlayData playData = new CardPlayData
         {
             cardData = cardData,
-            cardInstance = null, // Enemy has no Card UI
+            cardInstance = cardScript,
             caster = Enemy,
             target = Player,
             resolvedPriority = priority
         };
 
         cardsToResolve.Add(playData);
+
+        //Trigger slide animation
+        cardScript.StartCoroutine(cardScript.SlideToPosition(isEnemy: true));
+
         Debug.Log($"Enemy queued: {cardData.Name} (Priority {priority})");
     }
 

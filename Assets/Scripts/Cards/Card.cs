@@ -138,7 +138,7 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
             cg.blocksRaycasts = false;
 
             // Slide animation
-            StartCoroutine(SlideToCenter());
+            StartCoroutine(SlideToPosition(isEnemy: false));
         }
         else
         {
@@ -164,14 +164,14 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
     }
 
     // === SLIDE ANIMATION ===
-    private IEnumerator SlideToCenter()
+    public IEnumerator SlideToPosition(bool isEnemy = false)
     {
         transform.SetAsLastSibling();
 
         Vector3 startPos = transform.position;
 
         // Choose position
-        float xPos = Screen.width * 0.2f;
+        float xPos = isEnemy ? Screen.width * 0.8f : Screen.width * 0.2f;
         float yPos = Screen.height / 2f;
         Vector3 targetPos = new Vector3(xPos, yPos, startPos.z);
 

@@ -5,7 +5,7 @@ public class Hand : MonoBehaviour
 {
     public static Hand Instance;
 
-    [SerializeField] private GameObject cardPrefab;
+    public GameObject cardPrefab;
     [SerializeField] private Transform handTransform;
 
     private List<Card> cardsInHand = new List<Card>();
