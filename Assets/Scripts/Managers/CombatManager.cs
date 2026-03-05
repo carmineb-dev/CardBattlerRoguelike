@@ -81,6 +81,20 @@ public class CombatManager : MonoBehaviour
             return priorityCompare;
         });
 
+        // Visual cards reorder
+        for (int i = 0; i < cardsToResolve.Count; i++)
+        {
+            CardPlayData playData = cardsToResolve[i];
+
+            // Only player cards
+            if (playData.cardInstance != null)
+            {
+                playData.cardInstance.transform.SetSiblingIndex(cardsToResolve.Count - i);
+            }
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
         // Execute cards in order
         foreach (CardPlayData playData in cardsToResolve)
         {
@@ -93,14 +107,15 @@ public class CombatManager : MonoBehaviour
             if (playData.cardInstance != null && playData.caster == Player)
             {
                 Hand.Instance.RemoveCard(playData.cardInstance);
+                playData.cardInstance.TriggerFadeOut();
             }
 
             // Pause for visual feedback
             yield return new WaitForSeconds(1f);
         }
+
         // Clear resolved cards
         cardsToResolve.Clear();
-        DestroyPlayedCards();
 
         // Hide intent after resolution
         enemyIntentUI.HideIntent();
@@ -193,19 +208,6 @@ public class CombatManager : MonoBehaviour
         public Character caster;
         public Character target;
         public int resolvedPriority;
-    }
-
-    private void DestroyPlayedCards()
-    {
-        //Find every played card (with alpha = 0.5)
-        Card[] allCards = FindObjectsByType<Card>(FindObjectsSortMode.None);
-        foreach (Card card in allCards)
-        {
-            if (card.IsPlayed())
-            {
-                Destroy(card.gameObject);
-            }
-        }
     }
 
     private void ProcessTurnBuffs()

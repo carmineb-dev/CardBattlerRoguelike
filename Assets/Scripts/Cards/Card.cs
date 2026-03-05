@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.LowLevelPhysics2D;
 using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
@@ -165,6 +166,8 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
     // === SLIDE ANIMATION ===
     private IEnumerator SlideToCenter()
     {
+        transform.SetAsLastSibling();
+
         Vector3 startPos = transform.position;
 
         // Choose position
@@ -192,5 +195,30 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
         {
             transform.SetParent(mainCanvas.transform, true);
         }
+    }
+
+    // === FADE OUT ===
+    public IEnumerator FadeOutAndDestroy()
+    {
+        Debug.Log($"FadeOut START: {cardData.Name}");
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+
+        float duration = 0.3f;
+        float elapsed = 0f;
+        float startAlpha = cg.alpha;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / duration);
+            yield return null;
+        }
+        Debug.Log($"FadeOut COMPLETE: {cardData.Name}");
+        Destroy(gameObject);
+    }
+
+    public void TriggerFadeOut()
+    {
+        StartCoroutine(FadeOutAndDestroy());
     }
 }

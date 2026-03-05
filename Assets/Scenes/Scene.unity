@@ -2285,15 +2285,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Deck
   startingDeck:
   - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: 235104d3c0517ac409ddc489f7594790, type: 2}
+  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
+  - {fileID: 11400000, guid: 235104d3c0517ac409ddc489f7594790, type: 2}
   - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
+  - {fileID: 11400000, guid: 235104d3c0517ac409ddc489f7594790, type: 2}
   - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
-  - {fileID: 11400000, guid: f50d65916e202284a89baa7f4a59cfd4, type: 2}
+  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
+  - {fileID: 11400000, guid: da4f0853e9abef44aa573e42f20ee8db, type: 2}
   drawPile: []
   discardPile: []
 --- !u!1 &1043945454

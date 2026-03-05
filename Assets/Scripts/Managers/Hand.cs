@@ -37,8 +37,6 @@ public class Hand : MonoBehaviour
     public void RemoveCard(Card card)
     {
         cardsInHand.Remove(card);
-
-        Destroy(card.gameObject);
     }
 
     public void ClearHand()
