@@ -33,6 +33,9 @@ public class Enemy : Character
 
     public override void Initialize()
     {
+        // Get Hp from GameManager scaling
+        maxHp = GameManager.Instance.GetEnemyMaxHP();
+
         // Stats
         currentHp = maxHp;
         currentMana = maxMana;

@@ -83,4 +83,18 @@ public class Deck : MonoBehaviour
         discardPile.Clear();
         Shuffle();
     }
+
+    public void ResetDeck()
+    {
+        // Clear piles
+        drawPile.Clear();
+        discardPile.Clear();
+
+        // Reload starting deck
+        drawPile.AddRange(startingDeck);
+
+        Shuffle();
+
+        Debug.Log($"Deck reset - {drawPile.Count} cards in draw pile");
+    }
 }

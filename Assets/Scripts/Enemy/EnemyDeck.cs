@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem.Controls;
 
 public class EnemyDeck : MonoBehaviour
 {
@@ -82,5 +83,15 @@ public class EnemyDeck : MonoBehaviour
         drawPile.AddRange(discardPile);
         discardPile.Clear();
         Shuffle();
+    }
+
+    public void ResetDeck()
+    {
+        drawPile.Clear();
+        discardPile.Clear();
+        drawPile.AddRange(startingDeck);
+        Shuffle();
+
+        Debug.Log($"Enemy deck reset - {drawPile.Count} cards");
     }
 }

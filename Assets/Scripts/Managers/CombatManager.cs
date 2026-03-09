@@ -103,6 +103,14 @@ public class CombatManager : MonoBehaviour
             // Execute effect
             playData.cardData.Effect.Execute(playData.caster, playData.target, playData.cardData.Value);
 
+            // Check if enemy died
+            if (Enemy.currentHp <= 0)
+            {
+                Debug.Log("Enemy defeated!");
+                ShowVictoryScreen();
+                yield break;
+            }
+
             // Fade out cards
             if (playData.cardInstance != null)
             {
@@ -265,6 +273,65 @@ public class CombatManager : MonoBehaviour
             Enemy.priorityBoostRemaining = 0;
             Enemy.priorityBoostValue = 0;
             Enemy.hasParryActive = false;
+        }
+    }
+
+    private void ShowVictoryScreen()
+    {
+        // Enable victory UI (placeholder)
+        Debug.Log("VICTORY! Show next fight button");
+
+        // Cleanup carte non risolte
+        CleanupUnresolvedCards();
+
+        // Placeholder: auto next fight
+        StartCoroutine(AutoNextFight());
+    }
+
+    private void CleanupUnresolvedCards()
+    {
+        // Destroy alla cards in scene
+        Card[] allCards = FindObjectsByType<Card>(FindObjectsSortMode.None);
+
+        foreach (Card card in allCards)
+        {
+            Destroy(card.gameObject);
+        }
+
+        // Clear queue
+        cardsToResolve.Clear();
+
+        Debug.Log("Cleaned up unresolved cards");
+    }
+
+    private IEnumerator AutoNextFight()
+    {
+        yield return new WaitForSeconds(2f);
+
+        if (GameManager.Instance.IsBossFight())
+        {
+            Debug.Log("YOU WIN THE GAME!");
+            // TODO: Win screen
+        }
+        else
+        {
+            GameManager.Instance.NextFight();
+
+            // Reset decks
+            Deck.Instance.ResetDeck();
+            EnemyDeck.Instance.ResetDeck();
+
+            // Clear Hand
+            Hand.Instance.ClearHand();
+
+            // Reinitialize combat
+            Player.Initialize();
+            Enemy.Initialize();
+
+            // Update UI
+            FindFirstObjectByType<FightCounterUI>().UpdateUI();
+
+            Debug.Log("Next fight started!");
         }
     }
 }

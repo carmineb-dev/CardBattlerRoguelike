@@ -27,6 +27,12 @@ public class Player : Character
         currentMana = maxMana;
         currentBlock = 0;
 
+        // Draw 5 cards
+        for (int i = 0; i < 5; i++)
+        {
+            Deck.Instance.DrawCard();
+        }
+
         // UI
         UpdateAllUI();
     }
