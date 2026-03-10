@@ -35,6 +35,13 @@ public class CombatManager : MonoBehaviour
 
     private void InitializeCombat()
     {
+        // Load appropriate deck for fight
+        string deckName = GameManager.Instance.GetEnemyDeckForFight();
+        EnemyDeck.Instance.LoadDeck(deckName);
+
+        // Set enemy strategy
+        Enemy.SetStrategy(GameManager.Instance.GetEnemyStrategyForFight());
+
         player.Initialize();
         enemy.Initialize();
 
@@ -118,6 +125,11 @@ public class CombatManager : MonoBehaviour
                 if (playData.caster == Player)
                 {
                     Hand.Instance.RemoveCard(playData.cardInstance);
+                    Deck.Instance.Discard(playData.cardData); // Player discard
+                }
+                else
+                {
+                    EnemyDeck.Instance.Discard(playData.cardData); // Enemy discard
                 }
                 playData.cardInstance.TriggerFadeOut();
             }
@@ -317,9 +329,15 @@ public class CombatManager : MonoBehaviour
         {
             GameManager.Instance.NextFight();
 
+            // Load deck for new fight
+            string deckName = GameManager.Instance.GetEnemyDeckForFight();
+            EnemyDeck.Instance.LoadDeck(deckName);
+
+            // Set strategy
+            Enemy.SetStrategy(GameManager.Instance.GetEnemyStrategyForFight());
+
             // Reset decks
             Deck.Instance.ResetDeck();
-            EnemyDeck.Instance.ResetDeck();
 
             // Clear Hand
             Hand.Instance.ClearHand();
@@ -327,6 +345,10 @@ public class CombatManager : MonoBehaviour
             // Reinitialize combat
             Player.Initialize();
             Enemy.Initialize();
+
+            // Enemy pre-choose cards
+            Enemy.PreChooseCardsForTurn();
+            enemyIntentUI.ShowIntent(Enemy.GetPreChosenCards());
 
             // Update UI
             FindFirstObjectByType<FightCounterUI>().UpdateUI();

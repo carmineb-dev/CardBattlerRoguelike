@@ -267,6 +267,12 @@ public class Enemy : Character
         return ChooseRandom(playableCards);
     }
 
+    public void SetStrategy(EnemyStrategy newStrategy)
+    {
+        strategy = newStrategy;
+        Debug.Log($"Enemy strategy set to: {strategy}");
+    }
+
     // === DRAW METHOD ===
     public void DrawToHandSize(int targetSize)
     {

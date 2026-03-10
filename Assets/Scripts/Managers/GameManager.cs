@@ -55,4 +55,27 @@ public class GameManager : MonoBehaviour
         currentFight = 1;
         Debug.Log("Progresion reset");
     }
+
+    // Choosing deck of enemy
+    public string GetEnemyDeckForFight()
+    {
+        if (IsBossFight())
+        {
+            return "Boss";
+        }
+
+        // Alternate: Aggressive (1,3,5), Defensive (2,4)
+        return (currentFight % 2 == 1) ? "Aggressive" : "Defensive";
+    }
+
+    public EnemyStrategy GetEnemyStrategyForFight()
+    {
+        if (IsBossFight())
+        {
+            return EnemyStrategy.Aggressive; // Boss is aggressive
+        }
+
+        // Match deck type
+        return (currentFight % 2 == 1) ? EnemyStrategy.Aggressive : EnemyStrategy.Defensive;
+    }
 }
