@@ -161,8 +161,10 @@ public class CombatManager : MonoBehaviour
         Player.hasCounterStance = false;
         Enemy.hasCounterStance = false;
 
-        // Draw back to 5 cards if possible
-        int cardsToDraw = 5 - Hand.Instance.CardCount;
+        // Draw back to 5 cards + extra draws
+        int baseHandSize = 5;
+        int targetHandSize = baseHandSize + Player.extraDrawsThisTurn;
+        int cardsToDraw = Mathf.Max(targetHandSize - Hand.Instance.CardCount, 0);
 
         for (int i = 0; i < cardsToDraw; i++)
         {
@@ -175,6 +177,10 @@ public class CombatManager : MonoBehaviour
 
             Deck.Instance.DrawCard();
         }
+        // Reset extra draw counter for next turn
+        Player.extraDrawsThisTurn = 0;
+        Debug.Log($"Drew to hand size: {Hand.Instance.CardCount}");
+
         // Enemy draw back to 5
         Enemy.DrawToHandSize(5);
 
@@ -290,14 +296,13 @@ public class CombatManager : MonoBehaviour
 
     private void ShowVictoryScreen()
     {
-        // Enable victory UI (placeholder)
-        Debug.Log("VICTORY! Show next fight button");
+        Debug.Log("VICTORY!");
 
-        // Cleanup carte non risolte
+        // Cleanup cards
         CleanupUnresolvedCards();
 
-        // Placeholder: auto next fight
-        StartCoroutine(AutoNextFight());
+        // Show rewards instead of autonext
+        RewardManager.Instance.ShowRewards();
     }
 
     private void CleanupUnresolvedCards()
@@ -355,5 +360,10 @@ public class CombatManager : MonoBehaviour
 
             Debug.Log("Next fight started!");
         }
+    }
+
+    public void ContinueToNextFight()
+    {
+        StartCoroutine(AutoNextFight());
     }
 }

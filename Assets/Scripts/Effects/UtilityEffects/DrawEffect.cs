@@ -6,12 +6,11 @@ public class DrawEffect : CardEffect
     public override void Execute(Character caster, Character target, int value)
     {
         // Player draw
-        if (caster == CombatManager.Instance.Player)
+        if (caster is Player player)
         {
-            for (int i = 0; i < value; i++)
-            {
-                Deck.Instance.DrawCard();
-            }
+            // Track extra draws
+            player.extraDrawsThisTurn += value;
+            Debug.Log($"Player drew {value} cards - extra draws this turn :{player.extraDrawsThisTurn}");
         }
         else
         {

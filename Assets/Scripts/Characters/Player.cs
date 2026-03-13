@@ -13,6 +13,9 @@ public class Player : Character
     [SerializeField] private Hand hand;
     public Hand Hand => hand;
 
+    // === DRAW TRACKING ===
+    public int extraDrawsThisTurn = 0; // Extra cards drawn this turn
+
     private void Awake()
     {
         characterName = "Player";
@@ -89,6 +92,16 @@ public class Player : Character
     {
         base.IncreaseMaxMana(amount);
         manaUI.UpdateUI(currentMana, maxMana);
+    }
+
+    public void IncreaseBaseMaxMana(int amount)
+    {
+        baseMaxMana += amount;
+        maxMana = baseMaxMana; // Update current max mana
+        currentMana = maxMana; // Refill
+
+        manaUI.UpdateUI(currentMana, maxMana);
+        Debug.Log($"Base max amna increased to {baseMaxMana}");
     }
 
     // === HEAL ===

@@ -97,4 +97,10 @@ public class Deck : MonoBehaviour
 
         Debug.Log($"Deck reset - {drawPile.Count} cards in draw pile");
     }
+
+    public void AddCardToDeck(CardData card)
+    {
+        startingDeck.Add(card);
+        Debug.Log($"Added {card.Name} to deck - Total cards: {startingDeck.Count}");
+    }
 }

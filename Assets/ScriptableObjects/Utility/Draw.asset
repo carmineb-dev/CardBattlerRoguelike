@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Draw
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Draw
-  cardDescription: Draw 2 cards
+  cardDescription: Draw 2 cards extra in the next turn
   cardCost: 0
   cardPriority: 2
   cardCategory: 2
