@@ -59,6 +59,9 @@ public class Player : Character
     {
         base.Die();
         Debug.Log("Game Over");
+
+        // Show defeat screen
+        DefeatManager.Instance.ShowDefeat();
     }
 
     // === BLOCK ===

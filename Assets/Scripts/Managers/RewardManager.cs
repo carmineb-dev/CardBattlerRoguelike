@@ -10,9 +10,11 @@ public class RewardManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject rewardPanel;
+
     [SerializeField] private Button rewardButton1;
     [SerializeField] private Button rewardButton2;
     [SerializeField] private Button rewardButton3;
+    [SerializeField] private Button nextFightButton;
 
     [SerializeField] private TextMeshProUGUI reward1Text;
     [SerializeField] private TextMeshProUGUI reward2Text;
@@ -35,6 +37,9 @@ public class RewardManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // Next fight button listener
+        nextFightButton.onClick.AddListener(OnNextFightClicked);
     }
 
     public void ShowRewards()
@@ -95,9 +100,13 @@ public class RewardManager : MonoBehaviour
 
         Debug.Log($"Reward chosen: {card.Name} added to deck");
 
-        // Hide panel and continue
-        rewardPanel.SetActive(false);
-        CombatManager.Instance.ContinueToNextFight();
+        // Hide reward buttons
+        rewardButton1.gameObject.SetActive(false);
+        rewardButton2.gameObject.SetActive(false);
+        rewardButton3.gameObject.SetActive(false);
+
+        // Show next fight button
+        nextFightButton.gameObject.SetActive(true);
     }
 
     private void ChooseStatReward()
@@ -107,8 +116,26 @@ public class RewardManager : MonoBehaviour
 
         Debug.Log("Reward chosen: +1 max mana");
 
-        // Hide panel and continue
+        // Hide reward buttons
+        rewardButton1.gameObject.SetActive(false);
+        rewardButton2.gameObject.SetActive(false);
+        rewardButton3.gameObject.SetActive(false);
+
+        // Show next fight button
+        nextFightButton.gameObject.SetActive(true);
+    }
+
+    private void OnNextFightClicked()
+    {
+        // Reset UI
+        rewardButton1.gameObject.SetActive(true);
+        rewardButton2.gameObject.SetActive(true);
+        rewardButton3.gameObject.SetActive(true);
+
+        // Hide panel
         rewardPanel.SetActive(false);
+
+        // Continue
         CombatManager.Instance.ContinueToNextFight();
     }
 }

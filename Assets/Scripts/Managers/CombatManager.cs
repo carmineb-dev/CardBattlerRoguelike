@@ -328,7 +328,7 @@ public class CombatManager : MonoBehaviour
         if (GameManager.Instance.IsBossFight())
         {
             Debug.Log("YOU WIN THE GAME!");
-            // TODO: Win screen
+            WinManager.Instance.ShowWin();
         }
         else
         {
