@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Transactions;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,10 +24,14 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
     private bool isPlayed;
 
     private Vector3 originalScale;
+    private Vector3 originalPosition;
+    private Vector3 lastPosition;
+    private int originalSiblingIndex;
 
     private void Start()
     {
         originalScale = transform.localScale;
+        lastPosition = transform.position;
     }
 
     public void Initialize(CardData data, Character cardOwner)
@@ -77,12 +82,38 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        // Don't hover if alredy played
+        if (isPlayed) return;
+
+        // Save original state
+        originalPosition = transform.localPosition;
+        originalSiblingIndex = transform.GetSiblingIndex();
+
+        // Lift card
+        transform.localPosition = new Vector3(originalPosition.x, originalPosition.y + 100, originalPosition.z);
+
+        // Scale up
         transform.localScale = originalScale * 1.2f;
+
+        // Bring to the front
+        transform.SetAsLastSibling();
+
+        // Straighten rotation
+        transform.localRotation = Quaternion.identity;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (isPlayed) return;
+
+        // Reset position
+        transform.localPosition = originalPosition;
+
+        // Reset scale
         transform.localScale = originalScale;
+
+        // Reset sibling index
+        transform.SetSiblingIndex(originalSiblingIndex);
     }
 
     private void PlayCard()
@@ -132,6 +163,9 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
 
             isPlayed = true;
 
+            // Reset scale
+            transform.localScale = originalScale;
+
             // Visual feedback of the played card
             CanvasGroup cg = GetComponent<CanvasGroup>();
             cg.interactable = false; // Not clickable anymore
@@ -167,6 +201,9 @@ public class Card : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IP
     public IEnumerator SlideToPosition(bool isEnemy = false)
     {
         transform.SetAsLastSibling();
+
+        // Reset scale
+        transform.localScale = Vector3.one;
 
         Vector3 startPos = transform.position;
 
