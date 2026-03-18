@@ -42,6 +42,12 @@ public class CombatManager : MonoBehaviour
         // Set enemy strategy
         Enemy.SetStrategy(GameManager.Instance.GetEnemyStrategyForFight());
 
+        // Set as boss at fight 6
+        if (GameManager.Instance.IsBossFight())
+        {
+            Enemy.SetAsBoss();
+        }
+
         player.Initialize();
         enemy.Initialize();
 
@@ -114,6 +120,7 @@ public class CombatManager : MonoBehaviour
             if (Enemy.currentHp <= 0)
             {
                 Debug.Log("Enemy defeated!");
+                CleanupUnresolvedCards();
                 ShowVictoryScreen();
                 yield break;
             }
@@ -217,6 +224,13 @@ public class CombatManager : MonoBehaviour
 
     public void QueueEnemyCard(CardData cardData, int priority)
     {
+        // Boss phase shift: reduce priority (faster)
+        if (Enemy.IsPhaseShifted())
+        {
+            priority -= 1;
+            Debug.Log($"Boss phase shift: {cardData.Name} priority {cardData.Priority}->{priority}");
+        }
+
         // Spawn Card UI for enemy
         GameObject cardObj = Instantiate(Hand.Instance.cardPrefab);
         Card cardScript = cardObj.GetComponent<Card>();
@@ -301,8 +315,18 @@ public class CombatManager : MonoBehaviour
         // Cleanup cards
         CleanupUnresolvedCards();
 
-        // Show rewards instead of autonext
-        RewardManager.Instance.ShowRewards();
+        if (GameManager.Instance.IsBossFight())
+        {
+            Debug.Log("Boss defeated - showing WIN screen");
+            // Boss defeated = WIN Game
+            WinManager.Instance.ShowWin();
+        }
+        else
+        {
+            Debug.Log("Normal fight - showing REWARDS");
+            // Show rewards instead of autonext
+            RewardManager.Instance.ShowRewards();
+        }
     }
 
     private void CleanupUnresolvedCards()
@@ -340,6 +364,12 @@ public class CombatManager : MonoBehaviour
 
             // Set strategy
             Enemy.SetStrategy(GameManager.Instance.GetEnemyStrategyForFight());
+
+            // Set boss at fight 6
+            if (GameManager.Instance.IsBossFight())
+            {
+                Enemy.SetAsBoss();
+            }
 
             // Reset decks
             Deck.Instance.ResetDeck();

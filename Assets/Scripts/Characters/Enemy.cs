@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum EnemyStrategy
 {
@@ -17,6 +19,7 @@ public class Enemy : Character
     [SerializeField] private EnemyHandUI handUI;
 
     [SerializeField] private EnemyBlockUI blockUI;
+    [SerializeField] private Image enemySprite;
 
     // === HAND ===
     private List<CardData> enemyHand = new List<CardData>();
@@ -25,6 +28,11 @@ public class Enemy : Character
 
     // === STRATEGY ===
     [SerializeField] private EnemyStrategy strategy = EnemyStrategy.Random;
+
+    // === BOSS ===
+    [Header("Boss Mechanics")]
+    [SerializeField] private bool isBoss = false;
+    private bool phaseShifted = false;
 
     private void Awake()
     {
@@ -61,6 +69,10 @@ public class Enemy : Character
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
+
+        // Check phase shift
+        CheckPhaseShift();
+
         blockUI.UpdateUI(currentBlock);
         healthUI.UpdateUI(currentHp, maxHp);
     }
@@ -314,5 +326,48 @@ public class Enemy : Character
             handUI.UpdateHandCount(enemyHand.Count);
         }
         Debug.Log($"Enemy drew {count} cards, hand: {enemyHand.Count}");
+    }
+
+    // === BOSS ===
+    public void SetAsBoss()
+    {
+        isBoss = true;
+        Debug.Log("Enemy set as BOSS");
+    }
+
+    private void CheckPhaseShift()
+    {
+        if (!isBoss || phaseShifted) return;
+
+        float hpPercent = (float)currentHp / maxHp;
+
+        if (hpPercent <= 0.5f)
+        {
+            phaseShifted = true;
+            TriggerPhaseShift();
+        }
+    }
+
+    private void TriggerPhaseShift()
+    {
+        Debug.Log("BOSS PHASE SHIFT");
+
+        // Visual feedback
+
+        if (enemySprite != null)
+        {
+            enemySprite.color = Color.red;
+        }
+        else
+        {
+            Debug.LogWarning("Enemy sprite is missing");
+        }
+
+        // All card gain -1 priority managed in combatmanager
+    }
+
+    public bool IsPhaseShifted()
+    {
+        return phaseShifted;
     }
 }

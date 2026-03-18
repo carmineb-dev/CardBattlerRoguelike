@@ -1611,7 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c355045120626d4daa9f872acc82092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RewardManager
-  rewardPanel: {fileID: 1244288093}
+  rewardPanel: {fileID: 1936975395}
   rewardButton1: {fileID: 957781296}
   rewardButton2: {fileID: 964415317}
   rewardButton3: {fileID: 398959124}
@@ -3068,7 +3068,9 @@ MonoBehaviour:
   healthUI: {fileID: 533079830}
   handUI: {fileID: 1968225085}
   blockUI: {fileID: 1608431407}
+  enemySprite: {fileID: 419593062}
   strategy: 2
+  isBoss: 0
 --- !u!224 &980263920
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3878,7 +3880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1244288094
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6893,7 +6895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1936975396
 RectTransform:
   m_ObjectHideFlags: 0

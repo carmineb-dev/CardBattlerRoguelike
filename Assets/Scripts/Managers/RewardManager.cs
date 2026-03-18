@@ -44,6 +44,7 @@ public class RewardManager : MonoBehaviour
 
     public void ShowRewards()
     {
+        Debug.Log("ShowRewards CALLED");
         // Generate 3 random rewards
         GenerateRewards();
 
@@ -134,6 +135,7 @@ public class RewardManager : MonoBehaviour
 
         // Hide panel
         rewardPanel.SetActive(false);
+        nextFightButton.gameObject.SetActive(false);
 
         // Continue
         CombatManager.Instance.ContinueToNextFight();
