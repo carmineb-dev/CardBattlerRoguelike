@@ -234,6 +234,9 @@ public class CombatManager : MonoBehaviour
         // Spawn Card UI for enemy
         GameObject cardObj = Instantiate(Hand.Instance.cardPrefab);
         Card cardScript = cardObj.GetComponent<Card>();
+        CanvasGroup cg = cardScript.GetComponent<CanvasGroup>();
+        cg.interactable = false;
+        cg.blocksRaycasts = false;
 
         // Initialize enemy card data
         cardScript.Initialize(cardData, Enemy);
